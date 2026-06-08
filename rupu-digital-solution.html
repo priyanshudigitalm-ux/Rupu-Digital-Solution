@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rupu Digital Solution – Digital & Financial Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#0a1628;
+  --blue:#1a3a6b;
+  --accent:#2563eb;
+  --gold:#f0a500;
+  --light:#f4f7fd;
+  --white:#ffffff;
+  --text:#1a2340;
+  --muted:#64748b;
+  --border:#e2e8f0;
+  --card:#ffffff;
+  --radius:12px;
+  --shadow:0 4px 24px rgba(10,22,40,0.10);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:var(--white);overflow-x:hidden}
+
+/* ANIMATIONS */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideInLeft{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideInRight{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes chatBounce{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-6px) scale(1.05)}}
+
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-30px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(30px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+
+/* HEADER */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  background:rgba(10,22,40,0.97);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  transition:all 0.3s ease;
+}
+.header-inner{
+  max-width:1200px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2rem;height:70px;
+}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo-icon{
+  width:42px;height:42px;border-radius:10px;
+  background:linear-gradient(135deg,var(--accent),var(--gold));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;font-weight:900;
+  color:white;font-size:18px;letter-spacing:-1px;
+}
+.logo-text{display:flex;flex-direction:column;line-height:1.1}
+.logo-name{color:white;font-weight:600;font-size:16px;letter-spacing:0.3px}
+.logo-sub{color:rgba(255,255,255,0.5);font-size:11px;font-weight:400}
+nav{display:flex;align-items:center;gap:2px}
+nav a{
+  color:rgba(255,255,255,0.75);text-decoration:none;
+  font-size:14px;font-weight:400;padding:8px 14px;
+  border-radius:8px;transition:all 0.2s;
+}
+nav a:hover{color:white;background:rgba(255,255,255,0.08)}
+.btn-book{
+  background:linear-gradient(135deg,var(--accent),#1d4ed8);
+  color:white!important;border-radius:10px!important;
+  padding:9px 20px!important;font-weight:500!important;
+  font-size:14px!important;
+  box-shadow:0 2px 12px rgba(37,99,235,0.4);
+  transition:transform 0.2s,box-shadow 0.2s!important;
+}
+.btn-book:hover{transform:translateY(-1px)!important;box-shadow:0 4px 20px rgba(37,99,235,0.5)!important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px}
+.hamburger span{width:22px;height:2px;background:white;border-radius:2px;transition:all 0.3s}
+.mobile-nav{
+  display:none;position:fixed;top:70px;left:0;right:0;
+  background:rgba(10,22,40,0.98);padding:1rem;z-index:999;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+.mobile-nav.open{display:block}
+.mobile-nav a{
+  display:block;color:rgba(255,255,255,0.8);text-decoration:none;
+  padding:12px 16px;border-radius:8px;font-size:15px;
+  transition:background 0.2s;
+}
+.mobile-nav a:hover{background:rgba(255,255,255,0.08);color:white}
+
+/* HERO */
+.hero{
+  min-height:100vh;position:relative;overflow:hidden;
+  background:linear-gradient(160deg,var(--navy) 0%,#0f2447 50%,#0a1f3d 100%);
+  display:flex;align-items:center;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background-image:radial-gradient(ellipse at 70% 40%,rgba(37,99,235,0.18) 0%,transparent 60%),
+    radial-gradient(ellipse at 20% 80%,rgba(240,165,0,0.10) 0%,transparent 50%);
+}
+.hero-grid{
+  position:absolute;inset:0;opacity:0.04;
+  background-image:linear-gradient(rgba(255,255,255,0.5) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.5) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+.hero-inner{
+  max-width:1200px;margin:0 auto;padding:140px 2rem 80px;
+  display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;
+  position:relative;z-index:2;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(240,165,0,0.15);border:1px solid rgba(240,165,0,0.3);
+  color:var(--gold);border-radius:20px;padding:6px 16px;
+  font-size:13px;font-weight:500;margin-bottom:1.5rem;
+  animation:fadeIn 1s ease forwards;
+}
+.hero-badge span{width:6px;height:6px;background:var(--gold);border-radius:50%;animation:pulse 2s infinite}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.2rem,4vw,3.4rem);
+  color:white;line-height:1.15;font-weight:700;
+  margin-bottom:1.2rem;
+  animation:fadeInUp 0.8s ease forwards;
+}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero p{
+  color:rgba(255,255,255,0.68);font-size:18px;
+  line-height:1.7;margin-bottom:2.5rem;font-weight:300;
+  animation:fadeInUp 0.8s 0.15s ease both;
+}
+.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeInUp 0.8s 0.3s ease both}
+.btn-primary{
+  background:linear-gradient(135deg,var(--accent),#1d4ed8);
+  color:white;border:none;padding:14px 28px;
+  border-radius:12px;font-size:16px;font-weight:500;
+  cursor:pointer;text-decoration:none;display:inline-block;
+  box-shadow:0 4px 20px rgba(37,99,235,0.4);
+  transition:transform 0.2s,box-shadow 0.2s;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(37,99,235,0.5)}
+.btn-secondary{
+  background:rgba(255,255,255,0.08);color:white;
+  border:1px solid rgba(255,255,255,0.2);
+  padding:14px 28px;border-radius:12px;font-size:16px;
+  font-weight:500;cursor:pointer;text-decoration:none;
+  display:inline-block;transition:all 0.2s;
+  backdrop-filter:blur(4px);
+}
+.btn-secondary:hover{background:rgba(255,255,255,0.14);transform:translateY(-2px)}
+.hero-visual{
+  display:flex;justify-content:center;align-items:center;
+  animation:fadeInUp 0.8s 0.2s ease both;
+}
+.hero-card{
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:20px;padding:2rem;
+  backdrop-filter:blur(12px);
+  animation:float 5s ease-in-out infinite;
+  width:100%;max-width:360px;
+}
+.hero-card-header{display:flex;align-items:center;gap:12px;margin-bottom:1.5rem}
+.advisor-avatar{
+  width:56px;height:56px;border-radius:14px;
+  background:linear-gradient(135deg,var(--accent),var(--gold));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;font-weight:700;
+  color:white;font-size:20px;
+}
+.advisor-info h3{color:white;font-size:16px;font-weight:600;margin-bottom:2px}
+.advisor-info p{color:rgba(255,255,255,0.55);font-size:13px}
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stat-box{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:12px;padding:14px;text-align:center;
+}
+.stat-num{color:var(--gold);font-size:22px;font-weight:700;font-family:'Playfair Display',serif}
+.stat-label{color:rgba(255,255,255,0.5);font-size:12px;margin-top:3px}
+.hero-services{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px}
+.service-tag{
+  background:rgba(37,99,235,0.2);border:1px solid rgba(37,99,235,0.3);
+  color:rgba(255,255,255,0.8);border-radius:6px;padding:5px 12px;font-size:12px;
+}
+
+/* SECTIONS */
+section{padding:90px 0}
+.container{max-width:1200px;margin:0 auto;padding:0 2rem}
+.section-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(37,99,235,0.08);border:1px solid rgba(37,99,235,0.2);
+  color:var(--accent);border-radius:20px;padding:5px 14px;
+  font-size:12px;font-weight:600;text-transform:uppercase;
+  letter-spacing:1px;margin-bottom:1rem;
+}
+.section-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.8rem,3.5vw,2.6rem);
+  color:var(--text);font-weight:700;margin-bottom:1rem;line-height:1.2;
+}
+.section-sub{color:var(--muted);font-size:17px;line-height:1.7;max-width:600px;font-weight:300}
+.section-header{margin-bottom:3rem}
+.section-header.center{text-align:center}
+.section-header.center .section-sub{margin:0 auto}
+
+/* INSURANCE */
+#insurance{background:var(--light)}
+.grid-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.5rem}
+.service-card{
+  background:var(--card);border-radius:var(--radius);
+  padding:2rem;border:1px solid var(--border);
+  box-shadow:var(--shadow);
+  transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s;
+  cursor:default;
+}
+.service-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 12px 40px rgba(10,22,40,0.14);
+  border-color:rgba(37,99,235,0.25);
+}
+.card-icon{
+  width:56px;height:56px;border-radius:14px;margin-bottom:1.2rem;
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;
+}
+.card-icon.blue{background:rgba(37,99,235,0.10);color:var(--accent)}
+.card-icon.gold{background:rgba(240,165,0,0.10);color:var(--gold)}
+.card-icon.green{background:rgba(16,185,129,0.10);color:#059669}
+.card-icon.red{background:rgba(239,68,68,0.10);color:#dc2626}
+.card-icon.purple{background:rgba(139,92,246,0.10);color:#7c3aed}
+.card-icon.teal{background:rgba(20,184,166,0.10);color:#0d9488}
+.service-card h3{font-size:17px;font-weight:600;color:var(--text);margin-bottom:0.5rem}
+.service-card p{color:var(--muted);font-size:14px;line-height:1.6}
+
+/* BANKING */
+#banking{background:var(--white)}
+.banking-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center}
+.banking-list{display:flex;flex-direction:column;gap:0}
+.bank-item{
+  display:flex;align-items:center;gap:1rem;
+  padding:1rem 1.2rem;border-bottom:1px solid var(--border);
+  transition:background 0.2s;border-radius:10px;
+}
+.bank-item:hover{background:var(--light)}
+.bank-item:last-child{border-bottom:none}
+.bank-dot{
+  width:40px;height:40px;border-radius:10px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;
+}
+.bank-item h4{font-size:15px;font-weight:500;color:var(--text);margin-bottom:2px}
+.bank-item p{font-size:13px;color:var(--muted)}
+.banking-visual{
+  background:linear-gradient(135deg,var(--navy),var(--blue));
+  border-radius:20px;padding:2.5rem;color:white;
+  position:relative;overflow:hidden;
+}
+.banking-visual::before{
+  content:'';position:absolute;top:-40px;right:-40px;
+  width:200px;height:200px;border-radius:50%;
+  background:rgba(37,99,235,0.2);
+}
+.bv-title{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;margin-bottom:1rem}
+.bv-desc{color:rgba(255,255,255,0.65);font-size:15px;line-height:1.7;margin-bottom:1.5rem}
+.bv-badges{display:flex;flex-wrap:wrap;gap:8px}
+.bv-badge{
+  background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.15);
+  color:rgba(255,255,255,0.9);border-radius:8px;padding:6px 14px;font-size:13px;
+}
+
+/* ONLINE SERVICES */
+#services{background:var(--light)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:2rem}
+.tab-btn{
+  padding:8px 18px;border-radius:20px;border:1px solid var(--border);
+  background:white;color:var(--muted);font-size:14px;font-weight:500;
+  cursor:pointer;transition:all 0.2s;font-family:'DM Sans',sans-serif;
+}
+.tab-btn.active{background:var(--accent);color:white;border-color:var(--accent)}
+.tab-btn:hover:not(.active){background:var(--light);color:var(--text)}
+.tab-panel{display:none}
+.tab-panel.active{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
+.svc-item{
+  background:white;border-radius:10px;padding:1rem 1.2rem;
+  border:1px solid var(--border);display:flex;align-items:center;gap:10px;
+  transition:all 0.2s;
+}
+.svc-item:hover{border-color:rgba(37,99,235,0.4);transform:translateY(-2px);box-shadow:0 4px 16px rgba(37,99,235,0.08)}
+.svc-icon{font-size:20px;flex-shrink:0}
+.svc-item span{font-size:14px;font-weight:500;color:var(--text)}
+
+/* MUTUAL FUNDS */
+#mutual-funds{background:var(--white)}
+.mf-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.advisor-card{
+  background:linear-gradient(135deg,var(--navy),#0f2447);
+  border-radius:20px;padding:2.5rem;color:white;
+  position:relative;overflow:hidden;margin-bottom:2rem;
+}
+.advisor-card::after{
+  content:'';position:absolute;bottom:-30px;right:-30px;
+  width:150px;height:150px;border-radius:50%;
+  background:rgba(240,165,0,0.12);
+}
+.lic-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(240,165,0,0.2);border:1px solid rgba(240,165,0,0.35);
+  color:var(--gold);border-radius:8px;padding:5px 12px;
+  font-size:12px;font-weight:600;margin-bottom:1.2rem;
+}
+.advisor-card h3{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;margin-bottom:0.5rem}
+.advisor-card p{color:rgba(255,255,255,0.65);font-size:14px;line-height:1.6}
+.mf-features{display:flex;flex-direction:column;gap:1rem}
+.mf-feature{
+  display:flex;gap:1rem;align-items:flex-start;
+  padding:1.2rem;background:var(--light);border-radius:12px;
+  border:1px solid var(--border);transition:all 0.2s;
+}
+.mf-feature:hover{border-color:rgba(37,99,235,0.3);background:rgba(37,99,235,0.03)}
+.mf-feature-icon{
+  width:44px;height:44px;border-radius:10px;flex-shrink:0;
+  background:rgba(37,99,235,0.10);color:var(--accent);
+  display:flex;align-items:center;justify-content:center;font-size:20px;
+}
+.mf-feature h4{font-size:15px;font-weight:600;color:var(--text);margin-bottom:4px}
+.mf-feature p{font-size:13px;color:var(--muted);line-height:1.6}
+.strategy-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-top:1.5rem}
+.strategy-card{
+  background:var(--light);border-radius:12px;padding:1.2rem;
+  border:1px solid var(--border);text-align:center;
+}
+.strategy-card h4{font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px}
+.strategy-card p{font-size:12px;color:var(--muted)}
+.strategy-card .s-icon{font-size:24px;margin-bottom:8px}
+.booking-box{
+  background:linear-gradient(135deg,rgba(37,99,235,0.06),rgba(240,165,0,0.04));
+  border:1px solid rgba(37,99,235,0.2);border-radius:16px;padding:2rem;margin-top:1.5rem;
+}
+.booking-box h3{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;margin-bottom:1rem}
+.form-group{margin-bottom:1rem}
+.form-group label{display:block;font-size:13px;font-weight:500;color:var(--muted);margin-bottom:6px}
+.form-control{
+  width:100%;padding:10px 14px;border-radius:8px;
+  border:1px solid var(--border);font-family:'DM Sans',sans-serif;
+  font-size:14px;color:var(--text);background:white;
+  transition:border-color 0.2s,box-shadow 0.2s;
+}
+.form-control:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(37,99,235,0.1)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.btn-full{width:100%;padding:12px;font-size:15px}
+
+/* CONTACT */
+#contact{background:var(--light)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+.contact-info h3{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;margin-bottom:1.5rem}
+.info-item{display:flex;gap:1rem;align-items:flex-start;margin-bottom:1.5rem}
+.info-icon{
+  width:44px;height:44px;border-radius:10px;flex-shrink:0;
+  background:var(--accent);color:white;
+  display:flex;align-items:center;justify-content:center;font-size:18px;
+}
+.info-item h4{font-size:14px;font-weight:600;color:var(--text);margin-bottom:3px}
+.info-item p{font-size:14px;color:var(--muted);line-height:1.6}
+.contact-form{background:white;border-radius:16px;padding:2rem;border:1px solid var(--border);box-shadow:var(--shadow)}
+.contact-form h3{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;margin-bottom:1.5rem}
+.form-control-lg{width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--border);font-family:'DM Sans',sans-serif;font-size:15px;color:var(--text);margin-bottom:1rem;transition:border-color 0.2s,box-shadow 0.2s}
+.form-control-lg:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(37,99,235,0.1)}
+textarea.form-control-lg{resize:vertical;min-height:100px}
+select.form-control-lg{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2364748b' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:40px}
+
+/* WHATSAPP FLOAT */
+.whatsapp-float{
+  position:fixed;bottom:100px;right:24px;z-index:999;
+  width:56px;height:56px;border-radius:50%;
+  background:#25d366;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 20px rgba(37,211,102,0.5);
+  text-decoration:none;animation:chatBounce 3s ease-in-out infinite;
+  transition:transform 0.2s;
+}
+.whatsapp-float:hover{transform:scale(1.1)!important;animation:none}
+.whatsapp-float svg{width:28px;height:28px;fill:white}
+
+/* CHATBOT */
+.chat-fab{
+  position:fixed;bottom:24px;right:24px;z-index:1000;
+  width:56px;height:56px;border-radius:50%;
+  background:linear-gradient(135deg,var(--accent),#1d4ed8);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 20px rgba(37,99,235,0.5);cursor:pointer;
+  border:none;transition:all 0.2s;
+}
+.chat-fab:hover{transform:scale(1.08);box-shadow:0 8px 32px rgba(37,99,235,0.6)}
+.chat-fab svg{width:24px;height:24px;fill:white}
+.chat-window{
+  position:fixed;bottom:90px;right:24px;z-index:1000;
+  width:340px;background:white;border-radius:20px;
+  box-shadow:0 20px 60px rgba(10,22,40,0.18);
+  border:1px solid var(--border);
+  display:none;flex-direction:column;overflow:hidden;
+  animation:fadeInUp 0.3s ease;
+}
+.chat-window.open{display:flex}
+.chat-header{
+  background:linear-gradient(135deg,var(--navy),var(--blue));
+  padding:16px 20px;display:flex;align-items:center;gap:12px;
+  color:white;
+}
+.chat-avatar{
+  width:38px;height:38px;border-radius:10px;
+  background:rgba(255,255,255,0.15);
+  display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;
+}
+.chat-header-info h4{font-size:14px;font-weight:600;margin-bottom:1px}
+.chat-header-info p{font-size:12px;color:rgba(255,255,255,0.6)}
+.chat-close{margin-left:auto;background:none;border:none;color:rgba(255,255,255,0.6);cursor:pointer;font-size:20px;line-height:1}
+.chat-messages{padding:16px;height:260px;overflow-y:auto;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:80%;border-radius:12px;padding:10px 14px;font-size:14px;line-height:1.5}
+.msg.bot{background:var(--light);color:var(--text);align-self:flex-start;border-bottom-left-radius:4px}
+.msg.user{background:var(--accent);color:white;align-self:flex-end;border-bottom-right-radius:4px}
+.chat-quick{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 10px}
+.quick-btn{
+  background:rgba(37,99,235,0.08);border:1px solid rgba(37,99,235,0.2);
+  color:var(--accent);border-radius:14px;padding:5px 12px;
+  font-size:12px;cursor:pointer;transition:all 0.2s;font-family:'DM Sans',sans-serif;
+}
+.quick-btn:hover{background:rgba(37,99,235,0.15)}
+.chat-input-row{display:flex;gap:8px;padding:10px 16px 14px;border-top:1px solid var(--border)}
+.chat-input{
+  flex:1;border:1px solid var(--border);border-radius:20px;
+  padding:8px 14px;font-size:13px;font-family:'DM Sans',sans-serif;
+}
+.chat-input:focus{outline:none;border-color:var(--accent)}
+.chat-send{
+  width:36px;height:36px;border-radius:50%;background:var(--accent);
+  border:none;color:white;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:transform 0.2s;flex-shrink:0;
+}
+.chat-send:hover{transform:scale(1.1)}
+
+/* FOOTER */
+footer{background:var(--navy);color:rgba(255,255,255,0.7);padding:60px 0 30px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
+.footer-brand .logo{margin-bottom:1rem;display:inline-flex}
+.footer-brand p{font-size:14px;line-height:1.7;color:rgba(255,255,255,0.5);max-width:280px;margin-top:0.5rem}
+.footer-col h4{color:white;font-size:14px;font-weight:600;margin-bottom:1rem;letter-spacing:0.5px}
+.footer-col a{display:block;color:rgba(255,255,255,0.5);text-decoration:none;font-size:14px;margin-bottom:8px;transition:color 0.2s}
+.footer-col a:hover{color:white}
+.footer-col p{font-size:14px;color:rgba(255,255,255,0.5);line-height:1.8}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,0.08);padding-top:2rem;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;
+}
+.footer-bottom p{font-size:13px;color:rgba(255,255,255,0.4)}
+.social-links{display:flex;gap:10px}
+.social-link{
+  width:36px;height:36px;border-radius:8px;
+  background:rgba(255,255,255,0.06);
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,0.5);text-decoration:none;font-size:16px;
+  transition:all 0.2s;
+}
+.social-link:hover{background:rgba(37,99,235,0.3);color:white}
+
+/* TOAST */
+.toast{
+  position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:#1e293b;color:white;padding:12px 24px;border-radius:10px;
+  font-size:14px;opacity:0;transition:all 0.3s;z-index:9999;pointer-events:none;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{display:none}
+  .hamburger{display:flex}
+  .hero-inner{grid-template-columns:1fr;text-align:center}
+  .hero-ctas{justify-content:center}
+  .hero-visual{display:none}
+  .banking-grid,.mf-layout,.contact-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .form-row{grid-template-columns:1fr}
+  .strategy-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  .hero h1{font-size:2rem}
+  .footer-grid{grid-template-columns:1fr}
+  .strategy-grid{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;text-align:center}
+}
+
+.highlight{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="main-header">
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <div class="logo-icon">RD</div>
+      <div class="logo-text">
+        <span class="logo-name">Rupu Digital Solution</span>
+        <span class="logo-sub">Digital & Financial Services</span>
+      </div>
+    </a>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#insurance">Insurance</a>
+      <a href="#banking">Banking</a>
+      <a href="#services">Online Services</a>
+      <a href="#mutual-funds">Mutual Funds</a>
+      <a href="#contact">Contact</a>
+      <a href="#mutual-funds" class="btn-book">Book Appointment</a>
+    </nav>
+    <div class="hamburger" onclick="toggleMenu()" id="ham">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+<div class="mobile-nav" id="mobileNav">
+  <a href="#home" onclick="closeMobile()">Home</a>
+  <a href="#insurance" onclick="closeMobile()">Insurance</a>
+  <a href="#banking" onclick="closeMobile()">Banking</a>
+  <a href="#services" onclick="closeMobile()">Online Services</a>
+  <a href="#mutual-funds" onclick="closeMobile()">Mutual Funds</a>
+  <a href="#contact" onclick="closeMobile()">Contact</a>
+  <a href="#mutual-funds" onclick="closeMobile()" style="background:rgba(37,99,235,0.2);color:#93c5fd;margin-top:8px">📅 Book Appointment</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge"><span></span>Trusted Financial & Digital Partner</div>
+      <h1>Rupu Digital Solution – Your <em>One-Stop Hub</em> for Digital & Financial Services</h1>
+      <p>From insurance to mutual funds, government services to bill payments — everything you need, under one roof. Expert guidance from certified advisor Abhishek Das.</p>
+      <div class="hero-ctas">
+        <a href="#insurance" class="btn-primary">Explore Services</a>
+        <a href="#mutual-funds" class="btn-secondary">Book MF Consultation</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hero-card-header">
+          <div class="advisor-avatar">AD</div>
+          <div class="advisor-info">
+            <h3>Abhishek Das</h3>
+            <p>Certified MF Distributor</p>
+          </div>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-box"><div class="stat-num">500+</div><div class="stat-label">Happy Clients</div></div>
+          <div class="stat-box"><div class="stat-num">25+</div><div class="stat-label">Services Offered</div></div>
+          <div class="stat-box"><div class="stat-num">5+</div><div class="stat-label">Years Experience</div></div>
+          <div class="stat-box"><div class="stat-num">100%</div><div class="stat-label">Client Trust</div></div>
+        </div>
+        <div class="hero-services">
+          <span class="service-tag">🛡️ Insurance</span>
+          <span class="service-tag">📈 Mutual Funds</span>
+          <span class="service-tag">🏦 Banking</span>
+          <span class="service-tag">📄 Govt. Services</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSURANCE -->
+<section id="insurance">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="section-badge">🛡️ Insurance Services</div>
+      <h2 class="section-title">Protect Your Future with Our Insurance Services</h2>
+      <p class="section-sub">Comprehensive insurance solutions tailored to safeguard you and your family across all aspects of life.</p>
+    </div>
+    <div class="grid-cards">
+      <div class="service-card reveal" style="transition-delay:0.05s">
+        <div class="card-icon blue">❤️</div>
+        <h3>Life Insurance</h3>
+        <p>Secure your family's financial future with the right life insurance policy. We help you choose from term, ULIP, and endowment plans.</p>
+      </div>
+      <div class="service-card reveal" style="transition-delay:0.1s">
+        <div class="card-icon green">🏥</div>
+        <h3>Health Insurance</h3>
+        <p>Protect against rising healthcare costs. Individual, family floater, and critical illness plans available for complete health coverage.</p>
+      </div>
+      <div class="service-card reveal" style="transition-delay:0.15s">
+        <div class="card-icon gold">🛵</div>
+        <h3>Two-Wheeler Insurance</h3>
+        <p>Mandatory third-party and comprehensive bike insurance. Fast renewals, hassle-free claim assistance at your fingertips.</p>
+      </div>
+      <div class="service-card reveal" style="transition-delay:0.2s">
+        <div class="card-icon blue">🚗</div>
+        <h3>Four-Wheeler Insurance</h3>
+        <p>Comprehensive car insurance with zero-depreciation options. Compare plans and get the best coverage for your vehicle.</p>
+      </div>
+      <div class="service-card reveal" style="transition-delay:0.25s">
+        <div class="card-icon purple">📋</div>
+        <h3>Insurance Advisory</h3>
+        <p>Confused about which policy to choose? Our expert advisors analyse your needs and recommend the most suitable plan.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BANKING -->
+<section id="banking">
+  <div class="container">
+    <div class="banking-grid">
+      <div class="reveal-left">
+        <div class="section-badge">🏦 Banking & Payments</div>
+        <h2 class="section-title">Secure Banking & Quick Bill Payments</h2>
+        <p class="section-sub" style="margin-bottom:2rem">We bring banking convenience to your doorstep — money transfers, recharges, EMI payments and more.</p>
+        <div class="banking-list">
+          <div class="bank-item"><div class="bank-dot blue" style="background:rgba(37,99,235,0.10);color:var(--accent)">💸</div><div><h4>Domestic Money Transfer</h4><p>Send money securely anywhere in India</p></div></div>
+          <div class="bank-item"><div class="bank-dot" style="background:rgba(16,185,129,0.1);color:#059669">📱</div><div><h4>Mobile, TV, WiFi & Electricity Recharge</h4><p>All bills in one place, instantly</p></div></div>
+          <div class="bank-item"><div class="bank-dot" style="background:rgba(240,165,0,0.1);color:var(--gold)">💳</div><div><h4>Online Loan EMI Payments</h4><p>Never miss an EMI with easy digital payment</p></div></div>
+          <div class="bank-item"><div class="bank-dot" style="background:rgba(139,92,246,0.1);color:#7c3aed">🚦</div><div><h4>Vehicle Challan Payments</h4><p>Pay traffic fines quickly and legally</p></div></div>
+          <div class="bank-item"><div class="bank-dot" style="background:rgba(239,68,68,0.1);color:#dc2626">🏛️</div><div><h4>Tax Payments (Road, Property, Land Khajana)</h4><p>All government tax payments handled smoothly</p></div></div>
+          <div class="bank-item"><div class="bank-dot" style="background:rgba(20,184,166,0.1);color:#0d9488">🔒</div><div><h4>PF / EPF Withdrawal Assistance</h4><p>Step-by-step guidance for provident fund claims</p></div></div>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="banking-visual">
+          <div class="bv-title">Fast. Secure. Convenient.</div>
+          <div class="bv-desc">We are your trusted partner for all financial transactions. Our secure digital platform ensures your money and data are always protected.</div>
+          <div class="bv-badges">
+            <span class="bv-badge">✅ 100% Secure</span>
+            <span class="bv-badge">⚡ Instant Processing</span>
+            <span class="bv-badge">🕐 Open 7 Days</span>
+            <span class="bv-badge">📞 24/7 Support</span>
+          </div>
+        </div>
+        <div style="background:var(--light);border-radius:16px;padding:1.5rem;margin-top:1.5rem;border:1px solid var(--border)">
+          <p style="font-size:14px;color:var(--muted);margin-bottom:0.5rem">📍 Working Hours</p>
+          <p style="font-weight:600;color:var(--text);margin-bottom:0.3rem">Monday – Saturday</p>
+          <p style="font-size:14px;color:var(--muted)">9:00 AM – 7:00 PM</p>
+          <p style="margin-top:0.8rem;font-weight:600;color:var(--text)">📞 <a href="tel:6026717722" style="color:var(--accent);text-decoration:none">+91 60267 17722</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ONLINE SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="section-badge">💻 Online Services</div>
+      <h2 class="section-title">Essential Digital & Government Services</h2>
+      <p class="section-sub">Navigate complex government processes effortlessly. We handle the paperwork so you don't have to.</p>
+    </div>
+    <div class="tabs reveal" id="svcTabs">
+      <button class="tab-btn active" onclick="switchTab('id-cards')">🪪 ID Cards</button>
+      <button class="tab-btn" onclick="switchTab('certificates')">📜 Certificates</button>
+      <button class="tab-btn" onclick="switchTab('business')">🏢 Business & Legal</button>
+      <button class="tab-btn" onclick="switchTab('desk')">🖨️ Desk Services</button>
+    </div>
+    <div class="tab-panel active reveal" id="tab-id-cards">
+      <div class="svc-item"><div class="svc-icon">🪪</div><span>PAN Card (New & Correction)</span></div>
+      <div class="svc-item"><div class="svc-icon">🗳️</div><span>Voter ID (New & Correction)</span></div>
+      <div class="svc-item"><div class="svc-icon">🔵</div><span>Aadhaar Card (New & Correction)</span></div>
+      <div class="svc-item"><div class="svc-icon">🛂</div><span>Passport Application</span></div>
+      <div class="svc-item"><div class="svc-icon">🚗</div><span>Driving License Application</span></div>
+      <div class="svc-item"><div class="svc-icon">🔄</div><span>Vehicle RC Transfer</span></div>
+      <div class="svc-item"><div class="svc-icon">👷</div><span>e-Shram Card Application</span></div>
+      <div class="svc-item"><div class="svc-icon">🔍</div><span>Police Verification Application</span></div>
+      <div class="svc-item"><div class="svc-icon">💼</div><span>Online Job Applications</span></div>
+    </div>
+    <div class="tab-panel" id="tab-certificates">
+      <div class="svc-item"><div class="svc-icon">👶</div><span>Birth Certificate</span></div>
+      <div class="svc-item"><div class="svc-icon">🏷️</div><span>Caste Certificate</span></div>
+      <div class="svc-item"><div class="svc-icon">📋</div><span>Non-Creamy Layer (NCL) Certificate</span></div>
+      <div class="svc-item"><div class="svc-icon">👴</div><span>Senior Citizen Certificate</span></div>
+      <div class="svc-item"><div class="svc-icon">📄</div><span>Income Certificate</span></div>
+      <div class="svc-item"><div class="svc-icon">🏠</div><span>Residence Certificate</span></div>
+    </div>
+    <div class="tab-panel" id="tab-business">
+      <div class="svc-item"><div class="svc-icon">🏪</div><span>Trade License Application</span></div>
+      <div class="svc-item"><div class="svc-icon">🏭</div><span>Udyam Registration (MSME)</span></div>
+      <div class="svc-item"><div class="svc-icon">📝</div><span>GST Registration Guidance</span></div>
+      <div class="svc-item"><div class="svc-icon">📊</div><span>Digital Business Consultation</span></div>
+    </div>
+    <div class="tab-panel" id="tab-desk">
+      <div class="svc-item"><div class="svc-icon">🖥️</div><span>DTP (Desktop Publishing)</span></div>
+      <div class="svc-item"><div class="svc-icon">🖨️</div><span>Printouts (Color & B&W)</span></div>
+      <div class="svc-item"><div class="svc-icon">📑</div><span>Xerox / Photocopies</span></div>
+      <div class="svc-item"><div class="svc-icon">📸</div><span>High-Quality Photo Printing</span></div>
+      <div class="svc-item"><div class="svc-icon">📧</div><span>Email & Form Filling Assistance</span></div>
+      <div class="svc-item"><div class="svc-icon">📦</div><span>Document Scanning & Digitization</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- MUTUAL FUNDS -->
+<section id="mutual-funds">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="section-badge">📈 Mutual Fund Advisory</div>
+      <h2 class="section-title">Wealth Creation & Mutual Fund Advisory</h2>
+      <p class="section-sub">Personalized investment guidance by a certified MF distributor to help you build long-term wealth confidently.</p>
+    </div>
+    <div class="mf-layout">
+      <div class="reveal-left">
+        <div class="advisor-card">
+          <div class="lic-badge">🏅 AMFI Registered MF Distributor</div>
+          <h3>Abhishek Das</h3>
+          <p>Principal Mutual Fund Advisor & Business Owner at Rupu Digital Solution. With years of experience in financial advisory, Abhishek provides personalized investment strategies tailored to your goals, risk appetite, and financial future.</p>
+          <div style="margin-top:1.5rem;display:flex;gap:1rem;flex-wrap:wrap">
+            <div style="text-align:center">
+              <div style="font-size:20px;font-weight:700;color:var(--gold)">₹Crore+</div>
+              <div style="font-size:12px;color:rgba(255,255,255,0.5)">AUM Managed</div>
+            </div>
+            <div style="width:1px;background:rgba(255,255,255,0.1)"></div>
+            <div style="text-align:center">
+              <div style="font-size:20px;font-weight:700;color:var(--gold)">100+</div>
+              <div style="font-size:12px;color:rgba(255,255,255,0.5)">Active Investors</div>
+            </div>
+            <div style="width:1px;background:rgba(255,255,255,0.1)"></div>
+            <div style="text-align:center">
+              <div style="font-size:20px;font-weight:700;color:var(--gold)">5★</div>
+              <div style="font-size:12px;color:rgba(255,255,255,0.5)">Client Rating</div>
+            </div>
+          </div>
+        </div>
+        <div class="mf-features">
+          <div class="mf-feature">
+            <div class="mf-feature-icon">📚</div>
+            <div>
+              <h4>What are Mutual Funds?</h4>
+              <p>Mutual funds pool money from many investors to invest in diversified portfolios of stocks, bonds, and other assets — professionally managed for optimal returns.</p>
+            </div>
+          </div>
+          <div class="mf-feature">
+            <div class="mf-feature-icon">🎯</div>
+            <div>
+              <h4>Personalized Advisory</h4>
+              <p>We don't sell products — we build portfolios. Every recommendation is tailored to your income, goals, and risk tolerance.</p>
+            </div>
+          </div>
+          <div class="mf-feature">
+            <div class="mf-feature-icon">📊</div>
+            <div>
+              <h4>Portfolio Tracking</h4>
+              <p>Regular reviews and rebalancing to keep your investments aligned with market conditions and your evolving financial goals.</p>
+            </div>
+          </div>
+        </div>
+        <div class="strategy-grid">
+          <div class="strategy-card"><div class="s-icon">📅</div><h4>SIP</h4><p>Systematic Monthly Investment</p></div>
+          <div class="strategy-card"><div class="s-icon">💰</div><h4>Lumpsum</h4><p>One-time bulk investment</p></div>
+          <div class="strategy-card"><div class="s-icon">🧾</div><h4>ELSS</h4><p>Tax-saving funds u/s 80C</p></div>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="booking-box">
+          <h3>📅 Schedule a Mutual Fund Consultation with Abhishek Das</h3>
+          <p style="font-size:14px;color:var(--muted);margin-bottom:1.5rem">Free 30-minute personalized consultation. No commitments, just clarity.</p>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Full Name *</label>
+              <input type="text" class="form-control" placeholder="Your name" id="mfName">
+            </div>
+            <div class="form-group">
+              <label>Phone Number *</label>
+              <input type="tel" class="form-control" placeholder="Mobile number" id="mfPhone">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" class="form-control" placeholder="your@email.com" id="mfEmail">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Preferred Date</label>
+              <input type="date" class="form-control" id="mfDate">
+            </div>
+            <div class="form-group">
+              <label>Preferred Time</label>
+              <select class="form-control" id="mfTime">
+                <option>9:00 AM – 10:00 AM</option>
+                <option>10:00 AM – 11:00 AM</option>
+                <option>11:00 AM – 12:00 PM</option>
+                <option>2:00 PM – 3:00 PM</option>
+                <option>3:00 PM – 4:00 PM</option>
+                <option>4:00 PM – 5:00 PM</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Investment Goal</label>
+            <select class="form-control" id="mfGoal">
+              <option value="">Select your primary goal</option>
+              <option>Retirement Planning</option>
+              <option>Child Education / Marriage</option>
+              <option>Wealth Creation</option>
+              <option>Tax Saving (ELSS)</option>
+              <option>Emergency Fund</option>
+              <option>Buy Property / Car</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Monthly Investment Capacity (Optional)</label>
+            <select class="form-control">
+              <option value="">Prefer not to say</option>
+              <option>Below ₹2,000</option>
+              <option>₹2,000 – ₹5,000</option>
+              <option>₹5,000 – ₹10,000</option>
+              <option>₹10,000 – ₹25,000</option>
+              <option>Above ₹25,000</option>
+            </select>
+          </div>
+          <button class="btn-primary btn-full" onclick="bookAppointment()">Confirm Appointment →</button>
+          <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:0.8rem">We'll call/WhatsApp to confirm within 2 hours</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="section-badge">📍 Contact Us</div>
+      <h2 class="section-title">Visit Our Office or Get in Touch</h2>
+      <p class="section-sub">We're here Monday to Saturday, 9 AM to 7 PM. Walk in or send us a message.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="reveal-left">
+        <h3>Office Details</h3>
+        <div class="info-item">
+          <div class="info-icon">📍</div>
+          <div>
+            <h4>Office Address</h4>
+            <p>Rupu Digital Solution<br>Your Local Area, City, Assam<br>India – 781001</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">📞</div>
+          <div>
+            <h4>Phone / WhatsApp</h4>
+            <p><a href="tel:6026717722" style="color:var(--accent);text-decoration:none">+91 60267 17722</a></p>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">📧</div>
+          <div>
+            <h4>Email</h4>
+            <p><a href="mailto:info@rupudigital.in" style="color:var(--accent);text-decoration:none">info@rupudigital.in</a></p>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">🕐</div>
+          <div>
+            <h4>Operating Hours</h4>
+            <p>Monday – Saturday: 9:00 AM – 7:00 PM<br>Sunday: Closed</p>
+          </div>
+        </div>
+
+      </div>
+      <div class="reveal-right">
+        <div class="contact-form">
+          <h3>Send a Message</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <input type="text" class="form-control-lg" placeholder="Your Name" id="cName">
+            <input type="tel" class="form-control-lg" placeholder="Phone Number" id="cPhone">
+          </div>
+          <input type="email" class="form-control-lg" placeholder="Email Address" id="cEmail">
+          <select class="form-control-lg" id="cService">
+            <option value="">Service Needed</option>
+            <option>Insurance</option>
+            <option>Banking & Payments</option>
+            <option>Mutual Fund Advisory</option>
+            <option>PAN / Voter ID / Aadhaar</option>
+            <option>Passport / Driving License</option>
+            <option>Trade / Business Registration</option>
+            <option>Certificates</option>
+            <option>Desk Services</option>
+            <option>Other</option>
+          </select>
+          <textarea class="form-control-lg" placeholder="Your message..." rows="4" id="cMsg"></textarea>
+          <button class="btn-primary" style="width:100%;padding:14px;font-size:15px" onclick="sendMessage()">Send Message →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <div class="logo-icon">RD</div>
+          <div class="logo-text">
+            <span class="logo-name" style="font-size:15px">Rupu Digital Solution</span>
+            <span class="logo-sub">Digital & Financial Services</span>
+          </div>
+        </a>
+        <p>Your trusted partner for digital services, financial advisory, and government documentation in Assam. Led by certified advisor Abhishek Das.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="#insurance">Insurance</a>
+        <a href="#banking">Banking & Payments</a>
+        <a href="#services">Online Services</a>
+        <a href="#mutual-funds">Mutual Funds</a>
+        <a href="#services">Government Docs</a>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="#home">Home</a>
+        <a href="#mutual-funds">Book Consultation</a>
+        <a href="#contact">Contact</a>
+        <a href="https://wa.me/916026717722" target="_blank">WhatsApp Us</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact Info</h4>
+        <p>📞 <a href="tel:6026717722" style="color:rgba(255,255,255,0.5);text-decoration:none">+91 60267 17722</a></p>
+        <p>📧 info@rupudigital.in</p>
+        <p>📍 Assam, India</p>
+        <p>🕐 Mon–Sat, 9AM–7PM</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Rupu Digital Solution. All rights reserved. | Managed by Abhishek Das</p>
+      <div class="social-links">
+        <a href="https://wa.me/916026717722" class="social-link" target="_blank" title="WhatsApp">
+          <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+        <a href="#" class="social-link" title="Facebook">f</a>
+        <a href="#" class="social-link" title="Instagram">ig</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/916026717722?text=Hello!%20I%20found%20your%20website%20and%20need%20assistance." class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- CHATBOT FAB -->
+<button class="chat-fab" onclick="toggleChat()" id="chatFab" aria-label="Open Chat">
+  <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+</button>
+
+<!-- CHAT WINDOW -->
+<div class="chat-window" id="chatWindow">
+  <div class="chat-header">
+    <div class="chat-avatar">🤖</div>
+    <div class="chat-header-info">
+      <h4>Rupu Assistant</h4>
+      <p>Online · Typically replies instantly</p>
+    </div>
+    <button class="chat-close" onclick="toggleChat()">×</button>
+  </div>
+  <div class="chat-messages" id="chatMessages">
+    <div class="msg bot">👋 Hello! Welcome to Rupu Digital Solution. How can I help you today?</div>
+    <div class="msg bot">You can ask me about our services, office hours, documents needed, or book an appointment!</div>
+  </div>
+  <div class="chat-quick" id="quickReplies">
+    <button class="quick-btn" onclick="sendQuick('What are your office hours?')">🕐 Office Hours</button>
+    <button class="quick-btn" onclick="sendQuick('Documents needed for PAN card?')">🪪 PAN Docs</button>
+    <button class="quick-btn" onclick="sendQuick('How to book a mutual fund consultation?')">📅 Book Consult</button>
+    <button class="quick-btn" onclick="sendQuick('What insurance services do you offer?')">🛡️ Insurance</button>
+  </div>
+  <div class="chat-input-row">
+    <input type="text" class="chat-input" id="chatInput" placeholder="Type a message..." onkeypress="if(event.key==='Enter')sendChatMsg()">
+    <button class="chat-send" onclick="sendChatMsg()">
+      <svg viewBox="0 0 24 24" fill="white" width="16" height="16"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// HAMBURGER
+function toggleMenu(){
+  const mn=document.getElementById('mobileNav');
+  mn.classList.toggle('open');
+}
+function closeMobile(){document.getElementById('mobileNav').classList.remove('open')}
+
+// STICKY HEADER
+window.addEventListener('scroll',function(){
+  const h=document.getElementById('main-header');
+  if(window.scrollY>50){h.style.boxShadow='0 2px 30px rgba(0,0,0,0.3)'}
+  else{h.style.boxShadow='none'}
+});
+
+// SCROLL REVEAL
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible')}});
+},{threshold:0.12});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>observer.observe(el));
+
+// TABS
+function switchTab(id){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// CHATBOT
+const chatAnswers={
+  'office hours':'🕐 We are open Monday to Saturday, 9:00 AM to 7:00 PM. We are closed on Sundays. You can also reach us on WhatsApp anytime!',
+  'pan':'📄 For a new PAN Card, you need: Aadhaar Card, Passport Photo, and a filled Form 49A. For corrections, bring your existing PAN and proof of change. We handle the entire process for you!',
+  'passport':'🛂 For passport, you need: Aadhaar Card, Birth Certificate, Class 10 Certificate, Address Proof, and Passport Photo. We assist with the online application and documentation.',
+  'mutual fund':'📈 To book a Mutual Fund consultation with Abhishek Das, just scroll to the Mutual Funds section and fill the booking form — or WhatsApp us at +91 60267 17722. It\'s a FREE 30-minute session!',
+  'insurance':'🛡️ We offer Life Insurance, Health Insurance, Two-Wheeler Insurance, and Four-Wheeler Insurance. We also provide unbiased advisory to help you choose the right plan.',
+  'voter':'🗳️ For Voter ID, you need: Age proof, Address proof, and Passport Photo. We help with both new applications and corrections!',
+  'aadhaar':'🔵 For Aadhaar correction, visit our office with your existing Aadhaar and supporting document (any govt ID with correct info). We guide you through the online process.',
+  'charges':'💰 Our service charges are very minimal and depend on the service. Most government form-filling services start from ₹50–₹200. Mutual Fund advisory is completely FREE!',
+  'contact':'📞 You can reach us at +91 60267 17722 (Call/WhatsApp) or email us at info@rupudigital.in. Our office is open Mon–Sat, 9AM–7PM.',
+  'book':'📅 To book an appointment, scroll to the Mutual Funds section and fill in the consultation form. We\'ll confirm via WhatsApp within 2 hours!',
+};
+function getBotReply(msg){
+  const m=msg.toLowerCase();
+  if(m.includes('hour')||m.includes('timing')||m.includes('open'))return chatAnswers['office hours'];
+  if(m.includes('pan'))return chatAnswers['pan'];
+  if(m.includes('passport'))return chatAnswers['passport'];
+  if(m.includes('mutual')||m.includes('fund')||m.includes('sip')||m.includes('consult'))return chatAnswers['mutual fund'];
+  if(m.includes('insurance'))return chatAnswers['insurance'];
+  if(m.includes('voter'))return chatAnswers['voter'];
+  if(m.includes('aadhaar'))return chatAnswers['aadhaar'];
+  if(m.includes('charge')||m.includes('fee')||m.includes('cost')||m.includes('price'))return chatAnswers['charges'];
+  if(m.includes('contact')||m.includes('phone')||m.includes('number'))return chatAnswers['contact'];
+  if(m.includes('book')||m.includes('appoint'))return chatAnswers['book'];
+  return "Thank you for your message! For detailed assistance, please call us at 📞 +91 60267 17722 or WhatsApp us. We're happy to help!";
+}
+function toggleChat(){
+  const w=document.getElementById('chatWindow');
+  w.classList.toggle('open');
+}
+function sendQuick(txt){
+  addMsg(txt,'user');
+  document.getElementById('quickReplies').style.display='none';
+  setTimeout(()=>{addMsg(getBotReply(txt),'bot')},600);
+}
+function sendChatMsg(){
+  const inp=document.getElementById('chatInput');
+  const txt=inp.value.trim();
+  if(!txt)return;
+  addMsg(txt,'user');
+  inp.value='';
+  document.getElementById('quickReplies').style.display='none';
+  setTimeout(()=>{addMsg(getBotReply(txt),'bot')},700);
+}
+function addMsg(txt,role){
+  const box=document.getElementById('chatMessages');
+  const d=document.createElement('div');
+  d.className='msg '+role;d.textContent=txt;
+  box.appendChild(d);
+  box.scrollTop=box.scrollHeight;
+}
+
+// TOAST
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3500);
+}
+
+// BOOKING
+function bookAppointment(){
+  const n=document.getElementById('mfName').value.trim();
+  const p=document.getElementById('mfPhone').value.trim();
+  if(!n||!p){showToast('⚠️ Please enter your name and phone number.');return;}
+  showToast('✅ Appointment request submitted! We will confirm within 2 hours via WhatsApp.');
+}
+
+// CONTACT FORM
+function sendMessage(){
+  const n=document.getElementById('cName').value.trim();
+  const p=document.getElementById('cPhone').value.trim();
+  if(!n||!p){showToast('⚠️ Please fill in your name and phone number.');return;}
+  showToast('✉️ Message sent! We will get back to you soon.');
+}
+
+// STAGGER card animations
+document.querySelectorAll('.service-card').forEach((c,i)=>{
+  c.style.transitionDelay=(i*0.06)+'s';
+});
+</script>
+</body>
+</html>
